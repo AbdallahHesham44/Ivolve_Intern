@@ -13,7 +13,7 @@ sudo groupadd <group_name>
 sudo groupadd ivolve
 ```
 
-![Process Overview](./lab1/createGroupAndUser.jpeg)
+![Process Overview](/lab1/createGroupAndUser.jpeg)
 
 
 ### 2. Create a User
