@@ -13,9 +13,6 @@ sudo groupadd <group_name>
 sudo groupadd ivolve
 ```
 
-![Process Overview](/lab1/createGroupAndUser.jpeg)
-
-
 ### 2. Create a User
 Run the following command to create a new User:
 ```bash
@@ -30,12 +27,21 @@ sudo passwd <user_name>
 sudo passwd abdallahU
 ```
 
+![Process Overview](/lab1/createGroupAndUser.jpeg)
+
+
 ### 3. Run Command with No password
 Add the following line to give members of the group permission to run apt install nginx without a passwordr:
 ```bash
 %<group_name> ALL=(ALL) NOPASSWD: Command i want allow user to run with No password
 abdallahU ALL=(ALL) NOPASSWD: /usr/bin/apt install nginx
 ```
+
+![Process Overview](/lab1/editeFile.jpeg)
+
+
+![Process Overview](/lab1/RunWithNoPassword.jpeg)
+
 
 ### 3. Test the Setup
 First switch to user:
@@ -47,4 +53,5 @@ Run the command to install Nginx:
 sudo apt install nginx
 ```
 
+![Process Overview](/lab1/testRun.jpeg)
 
