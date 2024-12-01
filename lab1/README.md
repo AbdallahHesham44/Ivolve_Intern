@@ -12,6 +12,10 @@ Run the following command to create a new group:
 sudo groupadd <group_name>
 sudo groupadd ivolve
 ```
+
+![Process Overview](./lab1/createGroupAndUser.jpeg)
+
+
 ### 2. Create a User
 Run the following command to create a new User:
 ```bash
