@@ -30,5 +30,6 @@ This script pings every server in the `192.168.1.x` subnet (where `x` ranges fro
 
 
 ## Notes
-The script uses a timeout of 1 second for each ping. You can modify this by changing the -W value in the ping command.
-The script suppresses ping output by redirecting it to /dev/null. You can remove &> /dev/null if you want to see detailed ping results.
+-The script uses a timeout of 1 second for each ping. You can modify this by changing the -W value in the ping command.
+-The script suppresses ping output by redirecting it to /dev/null.
+-You can remove &> /dev/null if you want to see detailed ping results.
