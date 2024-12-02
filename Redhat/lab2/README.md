@@ -17,7 +17,7 @@ Ensure the following tools and libraries are installed on your system:
    sudo apt update
    sudo apt install msmtp msmtp-mta -y
 ```
-2. **Edite msmtprc file**:
+2. ** Edite msmtprc file **:
    ```bash
    vim ~/.msmtprc
 ```
