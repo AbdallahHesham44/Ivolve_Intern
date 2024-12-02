@@ -26,7 +26,7 @@ This script pings every server in the `192.168.1.x` subnet (where `x` ranges fro
            echo "Server 192.168.1.$i is unreachable"
        fi
    done
-
+2. **Create the Script**  
 
 
 ## Notes
