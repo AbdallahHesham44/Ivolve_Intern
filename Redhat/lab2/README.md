@@ -37,7 +37,7 @@ logfile ~/.msmtp.log
 # Set default account to gmail
 account default : gmail
 ```
-3. ** Test Setup **:
+3. **Test Setup**:
    ```bash
   echo "Test email body" | mail -s "Test email subject" abdallah.hesham.102@gmail.com
 ```
