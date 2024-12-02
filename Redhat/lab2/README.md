@@ -13,11 +13,11 @@ Ensure the following tools and libraries are installed on your system:
 ### Installation of Required Libraries
 
 1. **Install `msmtp`**:
-   ```bash
+ ```bash
    sudo apt update
    sudo apt install msmtp msmtp-mta -y
 ```
-2. ** Edite msmtprc file **:
+2. **Edite msmtprc file**:
    ```bash
    vim ~/.msmtprc
 ```
@@ -42,7 +42,7 @@ account default : gmail
   echo "Test email body" | mail -s "Test email subject" abdallah.hesham.102@gmail.com
 ```
 
-3. ** Schedule a script **:
+3. **Schedule a script**:
 ```bash
 vim disk_space_monitor.sh
 ```
@@ -80,7 +80,7 @@ if (( $(echo "$USAGE > $THRESHOLD" | bc -l) )); then
 fi
 ```
 
-4. ** Schedule a script every day at 05:00 pm **:
+4. **Schedule a script every day at 05:00 pm**:
 ```bash
 crontab -e
 
