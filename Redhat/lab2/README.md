@@ -39,8 +39,8 @@ Ensure the following tools and libraries are installed on your system:
    ```
 3. **Test Setup**:
    ```bash
-  echo "Test email body" | mail -s "Test email subject" abdallah.hesham.102@gmail.com
-  ```
+       echo "Test email body" | mail -s "Test email subject" abdallah.hesham.102@gmail.com
+   ```
 
 3. **Schedule a script**:
    ```bash
