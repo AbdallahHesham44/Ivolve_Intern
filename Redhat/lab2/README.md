@@ -46,7 +46,7 @@ Ensure the following tools and libraries are installed on your system:
    ```bash
    vim disk_space_monitor.sh
    ```
-   *** Add code ***
+   ***Add code***
    ```bash
    #!/bin/bash
    
