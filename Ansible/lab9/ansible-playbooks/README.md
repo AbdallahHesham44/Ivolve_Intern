@@ -14,8 +14,8 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
 
 ### Step 1:Encrypt Sensitive Information with Ansible Vault
 **Create a Vault file:**
-
-    ```bash
+```bash
+  
    ansible-vault create vault.yml
     ```
 **Add the following content (modify the values as needed):**
