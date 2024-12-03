@@ -1,0 +1,20 @@
+---
+- name: Install Nginx on managed hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update the package list
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
