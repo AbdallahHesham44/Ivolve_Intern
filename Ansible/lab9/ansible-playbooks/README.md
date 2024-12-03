@@ -20,7 +20,7 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
     ```
 **Add the following content (modify the values as needed):**
 
-    ```bash
+    ``` bash
     db_user: ivolve_user
     db_password: secure_password123
     ```
