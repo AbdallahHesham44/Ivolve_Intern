@@ -13,7 +13,6 @@ This project demonstrates how to:
 - AWS CLI configured with valid credentials (`aws configure`)  
 - Python libraries: `boto3` and `botocore`  
 - SSH access to target servers  
-
 ---
 
 ## Project Structure  
@@ -73,6 +72,9 @@ play book install Apache
   ```bash
       ansible-inventory -i aws_ec2.yml install_apache.yml 
   ```
+
+![lab11](https://github.com/user-attachments/assets/6aaace93-8922-4f67-a2fc-a7b0155ad07e)
+
 ## Ensure the Role is Installed
 **Run the following command to install the role in a specific directory:**
 ```bash
@@ -82,6 +84,8 @@ play book install Apache
 ```bash
        ansible all -i aws_ec2.yml -m command -a " systemctl status apache2 "
 ```
+![lab11 2](https://github.com/user-attachments/assets/1f46d9dc-2e1d-42a3-ba7d-c6b8b8279be9)
+
 # Some Issues and tips
 
 ## 1-install boto3 use:
