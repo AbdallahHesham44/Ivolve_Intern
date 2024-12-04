@@ -17,25 +17,25 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
 ```bash
   
    ansible-vault create vault.yml
-    ```
+```
 **Add the following content (modify the values as needed):**
 
-    ``` bash
+  ```bash
     db_user: ivolve_user
     db_password: secure_password123
-    ```
+  ```
 **Save and close. You’ll be prompted to set a password for the vault.**
 ***To view or edit the Vault file later:***
-    ```bash
+  ```bash
    ansible-vault edit vault.yml
-    ```
+   ```
 ### Step 2:  Write the Ansible Playbook
 **Create a playbook file:**
-    ```bash
+```bash
    nano install_mysql.yml
-    ```
+ ```
 **Add the following content:**
-    ```bash
+```bash
     ---
 - name: Install MySQL and configure ivolve database
   hosts: all
@@ -80,11 +80,11 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
         login_password: "{{ mysql_root_password }}"
 
 
-    ```
+```
 ***Run the Playbook***
-    ```bash
+ ```bash
         ansible-playbook -i inventory install_mysql.yml --ask-vault-pass
-    ```
+  ```
     
 
   ### Step 4: Fix some Issues
@@ -98,31 +98,31 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
 **Fix the Issue**
  **1. Log into your managed host (e.g., EC2 instance) using SSH.**
   
-    ```bash
+ ```bash
     ssh -i /path/to/private_key.pem ubuntu@<ec2_public_ip>
-    ```
+ ```
   
 **2.Set the root password during or after MySQL installation (if not done already):**
-    ```bash
+ ```bash
       sudo mysql
       ALTER USER 'root'@'localhost' IDENTIFIED BY '12345';
       FLUSH PRIVILEGES;
-    ```
+ ```
   **3. Update your playbook to include the root password:**
-    ```bash
+```bash
       - name: Create ivolve database
         mysql_db:
           name: ivolve
           state: present
           login_user: root
           login_password: "{{ mysql_root_password }}"
-    ```
+ ```
    **4. Add the mysql_root_password variable in your Vault file:**
-      ```yaml 
+ ```yaml 
       mysql_root_password: your_root_password
-      ```
+ ```
    **5. Rerun the playbook with the vault:**
-      ```bash
+ ```bash
        ansible-playbook -i inventory install_mysql.yml --ask-vault-pass
-      ```
+```
       
