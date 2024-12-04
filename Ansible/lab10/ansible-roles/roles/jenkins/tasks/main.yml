@@ -1,0 +1,27 @@
+---
+    - name: Download Jenkins repository GPG key
+      ansible.builtin.command:
+        cmd: wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
+      args:
+        creates: /usr/share/keyrings/jenkins-keyring.asc
+
+    - name: Add Jenkins APT repository
+      ansible.builtin.shell:
+        cmd: echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/" | tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+      args:
+        creates: /etc/apt/sources.list.d/jenkins.list
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
+
+    - name: Ensure Jenkins service is started and enabled
+      ansible.builtin.service:
+        name: jenkins
+        state: started
+        enabled: yes
