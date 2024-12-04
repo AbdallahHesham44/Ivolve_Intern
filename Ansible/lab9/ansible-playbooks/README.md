@@ -89,13 +89,14 @@ This guide will walk you through setting up MySQL on a managed host using Ansibl
 
   ### Step 4: Fix some Issues
   **Understand the Problem**
-    MySQL root user might:
+   **MySQL root user might:**
     
-    Require a password for login.
-    Use Unix socket authentication, meaning it can only log in from the local host without a password, relying on the operating system's authentication.
-    By default, Ansible's mysql_db and mysql_user modules try to connect as root without a password unless explicitly specified.
+**Require a password for login.**
+    **Use Unix socket authentication, meaning it can only log in from the local host without a password, relying on the operating system's authentication.**
+  **By default, Ansible's mysql_db and mysql_user modules try to connect as root without a password unless explicitly specified.**
     
 **Fix the Issue**
+
  **1. Log into your managed host (e.g., EC2 instance) using SSH.**
   
  ```bash
