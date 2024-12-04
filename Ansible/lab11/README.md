@@ -73,7 +73,15 @@ play book install Apache
   ```bash
       ansible-inventory -i aws_ec2.yml install_apache.yml 
   ```
-
+## Ensure the Role is Installed
+**Run the following command to install the role in a specific directory:**
+```bash
+       ansible-galaxy install geerlingguy.apache --roles-path ./roles
+```
+## Verify apache installed in hosts
+```bash
+       ansible all -i aws_ec2.yml -m command -a " systemctl status apache2 "
+```
 # Some Issues and tips
 
 ## 1-install boto3 use:
