@@ -92,7 +92,7 @@ This **README** file provides a step-by-step guide for setting up and managing y
    ```bash
    aws ec2 describe-instances
    ```
-   ![image](https://github.com/user-attachments/assets/16ee180f-aa27-40c5-8920-377e61f2dd5f)
+![image](https://github.com/user-attachments/assets/16ee180f-aa27-40c5-8920-377e61f2dd5f)
 Test S3 Access:
    ```bash
    aws s3 
