@@ -22,6 +22,8 @@ This **README** file provides a step-by-step guide for setting up and managing y
 6. Review and create the budget.
 
 ---
+![image](https://github.com/user-attachments/assets/210bfd28-3de9-4dde-8ac0-617ba4245746)
+
 
 ## **Step 3: Create IAM Groups**
 
@@ -36,6 +38,8 @@ This **README** file provides a step-by-step guide for setting up and managing y
    - Click **Create Group**.
 
 ---
+![image](https://github.com/user-attachments/assets/0b0eab70-cea1-4641-a665-00cbc2381560)
+
 
 ## **Step 4: Create IAM Users**
 
@@ -52,6 +56,8 @@ This **README** file provides a step-by-step guide for setting up and managing y
    - Follow the instructions to set up MFA using an authenticator app.
 
 ---
+![image](https://github.com/user-attachments/assets/a7c0668a-9618-4cd8-a31f-f437e0ad4eb7)
+
 
 ### **2. Admin-2-Prog User with CLI Access Only**
 1. Go to **IAM Console** > **Users** > **Add Users**.
@@ -62,14 +68,19 @@ This **README** file provides a step-by-step guide for setting up and managing y
 
 ---
 
+![image](https://github.com/user-attachments/assets/6487ad93-8a7b-419d-a747-d0aae69d0107)
+
+
 ### **3. Dev-User with Programmatic and Console Access**
 1. Go to **IAM Console** > **Users** > **Add Users**.
 2. **User Name**: `dev-user`.
 3. **Access Type**: Select both **Programmatic Access** and **AWS Management Console Access**.
 4. Assign the user to the **DeveloperGroup**.
 5. Click **Create User** and download the **Access Key ID** and **Secret Access Key**.
-
 ---
+
+![image](https://github.com/user-attachments/assets/b4aea7c6-e103-4dc7-9038-905952d1583a)
+
 
 ## **Step 5: List All Users and Groups Using AWS CLI**
 
@@ -77,11 +88,13 @@ This **README** file provides a step-by-step guide for setting up and managing y
    ```bash
    aws configure
    ```
-
-
-
-
-Access denied for S3 dev-user
-![image](https://github.com/user-attachments/assets/cd1a81e8-1904-49a6-9bae-e37781f08642)
-EC2 Lunched 
-![image](https://github.com/user-attachments/assets/68ba9dc1-918f-4615-b34c-f333eee5a9fe)
+2. Test EC2 Access:
+   ```bash
+   aws ec2 describe-instances
+   ```
+   ![image](https://github.com/user-attachments/assets/16ee180f-aa27-40c5-8920-377e61f2dd5f)
+Test S3 Access:
+   ```bash
+   aws s3 
+   ```
+![image](https://github.com/user-attachments/assets/3ec1d971-5fde-4bfe-bf27-ac94ef2bb446)
