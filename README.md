@@ -22,6 +22,12 @@ This repository documents my learning journey and projects during a comprehensiv
   - Multi-tier application configuration
   - Dynamic inventory management
 
+### 3. AWS 
+
+   **Provide hands-on experience with a variety of AWS services**
+   - Including IAM, EC2, Load Balancers, S3, Lambda, API Gateway, and DynamoDB. 
+   - Able to manage security, networking, compute, and serverless resources within AWS.
+
 ### 3. Terraform
 - **Infrastructure Provisioning**
   - Cloud resource management
@@ -114,3 +120,7 @@ Feel free to provide feedback, suggestions, or improvements via issues or pull r
 ---
 
 **Disclaimer**: This repository is for educational purposes and represents my learning journey.
+
+
+
+---
