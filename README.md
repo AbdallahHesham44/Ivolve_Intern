@@ -25,8 +25,8 @@ This repository documents my learning journey and projects during a comprehensiv
 ### 3. AWS 
 
  - **Provide hands-on experience with a variety of AWS services**
-  - Including IAM, EC2, Load Balancers, S3, Lambda, API Gateway, and DynamoDB. 
-  - Able to manage security, networking, compute, and serverless resources within AWS.
+   - Including IAM, EC2, Load Balancers, S3, Lambda, API Gateway, and DynamoDB. 
+   - Able to manage security, networking, compute, and serverless resources within AWS.
 
 ### 4. Terraform
 - **Infrastructure Provisioning**
