@@ -96,5 +96,11 @@ From your local machine, SSH into the public EC2 instance:
 ```bash
 ssh -i "your-key.pem" ec2-user@<PublicEC2_Public_IP>
 ```
+![image](https://github.com/user-attachments/assets/4ea43213-dd94-46e5-946b-2a0c08e99af4)
 
-
+### **2. Connect From  the Public EC2 to Private EC2**
+From your local machine, SSH into the public EC2 instance:
+```bash
+ssh -i "your-key.pem" ec2-user@<PrivateEC2_Public_IP>
+```
+![image](https://github.com/user-attachments/assets/b9bd4238-00e6-40c9-a2c2-c684339e2352)
