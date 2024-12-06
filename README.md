@@ -24,11 +24,11 @@ This repository documents my learning journey and projects during a comprehensiv
 
 ### 3. AWS 
 
-   **Provide hands-on experience with a variety of AWS services**
-   - Including IAM, EC2, Load Balancers, S3, Lambda, API Gateway, and DynamoDB. 
-   - Able to manage security, networking, compute, and serverless resources within AWS.
+ - **Provide hands-on experience with a variety of AWS services**
+  - Including IAM, EC2, Load Balancers, S3, Lambda, API Gateway, and DynamoDB. 
+  - Able to manage security, networking, compute, and serverless resources within AWS.
 
-### 3. Terraform
+### 4. Terraform
 - **Infrastructure Provisioning**
   - Cloud resource management
   - Multi-cloud deployments
@@ -36,7 +36,7 @@ This repository documents my learning journey and projects during a comprehensiv
   - Modular infrastructure design
   - Provider configuration
 
-### 4. Jenkins
+### 5. Jenkins
 - **Continuous Integration/Continuous Deployment (CI/CD)**
   - Pipeline development
   - Automated build processes
@@ -44,7 +44,7 @@ This repository documents my learning journey and projects during a comprehensiv
   - Webhook configurations
   - Build triggers and notifications
 
-### 5. Kubernetes
+### 6. Kubernetes
 - **Container Orchestration**
   - Cluster management
   - Deployment strategies
@@ -53,7 +53,7 @@ This repository documents my learning journey and projects during a comprehensiv
   - Network policies
   - Helm chart development
 
-### 6. OpenShift
+### 7. OpenShift
 - **Enterprise Kubernetes Platform**
   - Container platform administration
   - Route and ingress configuration
