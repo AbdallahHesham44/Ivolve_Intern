@@ -1,4 +1,14 @@
 ---
+    - name: Install required dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - openjdk-17-jdk
+        - gnupg
+        - apt-transport-https
+        - ca-certificates
+        - curl
     - name: Download Jenkins repository GPG key
       ansible.builtin.command:
         cmd: wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
