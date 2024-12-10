@@ -14,6 +14,7 @@ This project sets up an AWS Virtual Private Cloud (VPC) with two public subnets,
 ```plaintext
 .
 ├── main.tf             # Main Terraform configuration
+├── outputs.tf
 ├── modules/
 │   └── ec2/            # EC2 module
 │       ├── main.tf     # EC2 module definition
