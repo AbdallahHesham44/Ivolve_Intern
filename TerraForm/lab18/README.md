@@ -31,7 +31,7 @@ This project sets up an AWS Virtual Private Cloud (VPC) with two public subnets,
 - **Security Group**: Opens ports for HTTP (80) and SSH (22).
 - **EC2 Instances**: Two NGINX servers, one in each subnet.
 
-## Configuration Details
+## ⚙️ Configuration Details
 
 ### VPC
 
@@ -129,4 +129,4 @@ Or Add  -auto-approve
 terraform destroy -auto-approve
 ```
 ---
-
+# 🙏 Thank You
