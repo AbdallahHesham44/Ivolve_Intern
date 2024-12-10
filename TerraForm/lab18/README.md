@@ -75,6 +75,9 @@ A security group (`nginx-sg`) is created with the following rules:
 git clone <repository-url>
 cd <repository-directory>
 ```
+```plaintext
+https://github.com/AbdallahHesham44/Ivolve_Training/edit/main/
+```
 
 ### Step 2: Initialize Terraform
 
@@ -109,7 +112,7 @@ Type `yes` to confirm.
   ```
 - Ues Output file to print the IPs of EC2
   
-![image](https://github.com/user-attachments/assets/66954625-8208-4e27-8d54-a86611e56668)
+  ![image](https://github.com/user-attachments/assets/66954625-8208-4e27-8d54-a86611e56668)
 
 
 ### Step 5: Destroy (Optional)
