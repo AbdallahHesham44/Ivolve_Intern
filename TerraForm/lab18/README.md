@@ -107,7 +107,8 @@ Type `yes` to confirm.
   ```bash
   aws ec2 describe-vpcs --filters "Name=tag:Name,Values=main-vpc"
   ```
-  - Ues Output file to print the IPs of EC2 
+- Ues Output file to print the IPs of EC2
+  
 ![image](https://github.com/user-attachments/assets/66954625-8208-4e27-8d54-a86611e56668)
 
 
