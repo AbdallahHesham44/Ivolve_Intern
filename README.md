@@ -1,3 +1,6 @@
+
+![logo](https://github.com/user-attachments/assets/2417fb77-c6cf-4300-8676-a32271907420)
+
 # DevOps & Cloud Infrastructure Internship Repository
 
 ## Overview
