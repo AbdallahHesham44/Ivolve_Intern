@@ -57,7 +57,8 @@ pipeline {
                         
                         if [ -f deployment.yaml ]; then
                             echo "Found deployment.yaml, modifying it."
-                            sed -i s|image: .*|image: abdallah1312/ivolve:54| Jenkins/lab23/deployment.yaml
+                           
+                             sed -i 's|image: .*|image: abdallah1312/ivolve:54|' Jenkins/lab23/deployment.yaml
                         else
                             echo "deployment.yaml not found!"
                         fi
