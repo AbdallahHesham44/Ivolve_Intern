@@ -8,11 +8,11 @@ pipeline {
     }
 
     stages {
-       
+        stages {
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code...'
-                git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
+                git branch: 'main', url: 'https://github.com/IbrahimAdell/Lab.git'
             }
         }
         stage('Build Docker Image') {
