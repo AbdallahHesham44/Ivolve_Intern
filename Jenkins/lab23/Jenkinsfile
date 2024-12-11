@@ -14,12 +14,14 @@ pipeline {
                 echo 'Checking out code...'
                 cleanWs()
                 git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
+                
             }
         }
 
           stage('Build Docker Image') {
             steps {
                 sh """
+                    cd Jenkins/lab23
                     docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
                 """
             }
