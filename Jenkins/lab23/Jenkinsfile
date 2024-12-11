@@ -39,10 +39,20 @@ pipeline {
 
         stage('Update Deployment YAML') {
             steps {
-                script {
-                    sh "pwd"
-                    sh "sed -i 's|image: .*|image: ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}"
+               script {
+                    sh '''
+                        echo "Current directory: $(pwd)"
+                        echo "Directory contents: $(ls -l)"
+                        
+                        if [ -f deployment.yaml ]; then
+                            echo "Found deployment.yaml, modifying it."
+                            sed -i s|image: .*|image: abdallah1312/ivolve:54| deployment.yaml
+                        else
+                            echo "deployment.yaml not found!"
+                        fi
+                    '''
                 }
+
             }
         }
 
