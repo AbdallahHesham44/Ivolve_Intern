@@ -44,6 +44,7 @@ pipeline {
                script {
                     sh '''
                         pwd
+                        cd Jenkins/lab23
                         echo "Current directory: $(pwd)"
                         echo "Directory contents: $(ls -l)"
                         
