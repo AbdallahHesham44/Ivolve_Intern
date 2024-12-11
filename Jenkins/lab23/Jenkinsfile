@@ -6,6 +6,7 @@ pipeline {
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME ="ivolve"
+        KUBECONFIG = "/home/abdallah/.kube/config"
     }
 
     stages {
@@ -67,11 +68,16 @@ pipeline {
 
             }
         }
-
+    stage('Start Minikube') {
+            steps {
+                // Start Minikube if it's not already running
+                sh 'minikube start'
+            }
+        }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh "kubectl --kubeconfig=/home/abdallah/.kube/config apply --dry-run=client -f deployment.yaml"
+                sh 'kubectl --kubeconfig=$KUBECONFIG apply --dry-run=client -f deployment.yaml'
                    
                 }
             }
