@@ -71,9 +71,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh "kubectl apply --dry-run=client -f ${KUBERNETES_DEPLOYMENT_FILE}"
-                    sh "kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}"
-                    sh "kubectl rollout status deployment/<deployment-name>"
+                    sh "kubectl --kubeconfig=/home/abdallah/.kube/config apply --dry-run=client -f deployment.yaml"
+                   
                 }
             }
         }
