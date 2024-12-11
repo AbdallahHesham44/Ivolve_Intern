@@ -9,10 +9,15 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()  // Cleans the workspace
+            }
+        }
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code...'
-                cleanWs()
+                
                 git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
                 
             }
@@ -21,6 +26,7 @@ pipeline {
           stage('Build Docker Image') {
             steps {
                 sh """
+                    cleanWs()
                     cd Jenkins/lab23
                     docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
                 """
