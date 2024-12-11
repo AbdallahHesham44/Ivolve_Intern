@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: jenkins-lab2
-        image: abdallah1312/ivolve:v5
+        image: abdallah1312/ivolve:54
         ports:
         - containerPort: 5000
