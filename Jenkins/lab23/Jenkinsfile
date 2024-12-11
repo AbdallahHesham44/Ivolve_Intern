@@ -27,6 +27,7 @@ pipeline {
             steps {
                 sh """
                     cleanWs()
+                    pwd
                     cd Jenkins/lab23
                     docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
                 """
