@@ -41,6 +41,7 @@ pipeline {
             steps {
                script {
                     sh '''
+                        pwd
                         echo "Current directory: $(pwd)"
                         echo "Directory contents: $(ls -l)"
                         
