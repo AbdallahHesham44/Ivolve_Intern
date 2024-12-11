@@ -29,9 +29,10 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
                     sh """
-                        docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
-                        docker tag ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_IMAGE_NAME}:latest
-                        docker push ${DOCKER_IMAGE_NAME}:latest
+                        docker push abdallah1312/ivolve:${env.BUILD_NUMBER}
+                        //docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
+                        //docker tag ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_IMAGE_NAME}:latest
+                        //docker push ${DOCKER_IMAGE_NAME}:latest
                     """
                 }
             }
