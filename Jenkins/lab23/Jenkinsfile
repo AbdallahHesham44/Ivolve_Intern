@@ -74,6 +74,7 @@ pipeline {
                 sh """
                     oc login https://api.ocp-training.ivolve-test.com:6443 --token=sha256~1yNoQKz-eTYiIC3Ag8MZvqVhr21jsEKSmjdBq7AWEl4 --insecure-skip-tls-verify
                 """
+            }
                 dir('Jenkins/lab23') {
                     sh 'oc apply -f deployment.yaml'
                 }
