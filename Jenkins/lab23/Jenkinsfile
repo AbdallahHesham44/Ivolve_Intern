@@ -27,7 +27,7 @@ pipeline {
           stage('Build Docker Image') {
             steps {
                 sh """
-                    cleanWs()
+                    
                     pwd
                     cd Jenkins/lab23
                     docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
@@ -77,8 +77,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                sh 'kubectl --kubeconfig=$KUBECONFIG apply --dry-run=client -f deployment.yaml'
-                   
+               oc login https://api.ocp-training.ivolve-test.com:6443 --username=abdallahhesham --password=nti1234#oc
+                kubectl apply -f deployment.yaml 
                 }
             }
         }
