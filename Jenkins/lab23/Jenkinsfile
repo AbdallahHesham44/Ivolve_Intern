@@ -68,17 +68,13 @@ pipeline {
 
             }
         }
-    stage('Start Minikube') {
-            steps {
-                // Start Minikube if it's not already running
-                sh 'minikube start'
-            }
-        }
+
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                oc login https://api.ocp-training.ivolve-test.com:6443 --username=abdallahhesham --password=nti1234#oc
-                kubectl apply -f deployment.yaml 
+                
+                oc apply -f deployment.yaml
                 }
             }
         }
