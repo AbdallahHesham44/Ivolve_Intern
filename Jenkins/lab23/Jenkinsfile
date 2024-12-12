@@ -72,9 +72,9 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-               oc login https://api.ocp-training.ivolve-test.com:6443 --username=abdallahhesham --password=nti1234#oc
+                    sh 'oc login https://api.ocp-training.ivolve-test.com:6443 --username=abdallahhesham --password=nti1234#oc'
                 
-                oc apply -f deployment.yaml
+                    sh 'oc apply -f deployment.yaml'
                 }
             }
         }
