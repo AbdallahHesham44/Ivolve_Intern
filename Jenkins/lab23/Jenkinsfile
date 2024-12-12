@@ -3,45 +3,40 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = "abdallah1312/ivolve"
-        KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
-        DOCKER_IMAGE_NAME ="ivolve"
+        KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
+        DOCKER_IMAGE_NAME = "ivolve"
         KUBECONFIG = "/home/abdallah/.kube/config"
     }
 
     stages {
         stage('Clean Workspace') {
             steps {
-                cleanWs()  // Cleans the workspace
-            }
-        }
-        stage('Checkout Code') {
-            steps {
-                echo 'Checking out code...'
-                
-                git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
-                
+                cleanWs()
             }
         }
 
-          stage('Build Docker Image') {
+        stage('Checkout Code') {
             steps {
-                sh """
-                    
-                    pwd
-                    cd Jenkins/lab23
-                    docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
-                """
+                git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('Jenkins/lab23') {
+                    sh """
+                        docker build -t docker.io/abdallah1312/ivolve:${BUILD_NUMBER} .
+                    """
+                }
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
+                withDockerRegistry([credentialsId: DOCKER_CREDENTIALS, url: '']) {
                     sh """
-                        docker push docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER}
-                        
-                       
+                        docker push docker.io/abdallah1312/ivolve:${BUILD_NUMBER}
                     """
                 }
             }
@@ -49,39 +44,25 @@ pipeline {
 
         stage('Update Deployment YAML') {
             steps {
-               script {
+                dir('Jenkins/lab23') {
                     sh """
-                        pwd
-                        cd Jenkins/lab23
-                        echo "Current directory: $(pwd)"
-                        echo "Directory contents: $(ls -l)"
-                        
-                        if [ -f deployment.yaml ]; then
-                            echo "Found deployment.yaml, modifying it."
-                           
-                             sed -i 's|image: .*|image: abdallah1312/ivolve:54|' deployment.yaml
+                        if [ -f ${KUBERNETES_DEPLOYMENT_FILE} ]; then
+                            sed -i 's|image: .*|image: abdallah1312/ivolve:${BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}
                         else
-                            echo "deployment.yaml not found!"
+                            echo "${KUBERNETES_DEPLOYMENT_FILE} not found!"
                         fi
                     """
                 }
-
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                script {
-                   sh """
-                    oc login https://api.ocp-training.ivolve-test.com:6443 --token=sha256~1yNoQKz-eTYiIC3Ag8MZvqVhr21jsEKSmjdBq7AWEl4 --insecure-skip-tls-verify'
-                      
-                  """  
-                    dir(Jenkins/lab23/){
+                sh """
+                    oc login https://api.ocp-training.ivolve-test.com:6443 --token=sha256~1yNoQKz-eTYiIC3Ag8MZvqVhr21jsEKSmjdBq7AWEl4 --insecure-skip-tls-verify
+                """
+                dir('Jenkins/lab23') {
                     sh 'oc apply -f deployment.yaml'
-                    }
-                    
-                
-               
                 }
             }
         }
@@ -95,8 +76,9 @@ pipeline {
             echo 'Pipeline failed! Check logs for details.'
         }
         always {
-            echo "Cleaning up resources..."
-            sh "docker rmi ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER} || true"
+            sh """
+                docker rmi docker.io/abdallah1312/ivolve:${BUILD_NUMBER} || true
+            """
         }
     }
 }
