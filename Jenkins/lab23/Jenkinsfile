@@ -3,40 +3,45 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = "abdallah1312/ivolve"
-        DOCKER_CREDENTIALS = "Docker-cred"
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
-        DOCKER_IMAGE_NAME = "ivolve"
+        DOCKER_CREDENTIALS = "Docker-cred"
+        DOCKER_IMAGE_NAME ="ivolve"
         KUBECONFIG = "/home/abdallah/.kube/config"
     }
 
     stages {
         stage('Clean Workspace') {
             steps {
-                cleanWs()
+                cleanWs()  // Cleans the workspace
             }
         }
-
         stage('Checkout Code') {
             steps {
+                echo 'Checking out code...'
+                
                 git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
+                
             }
         }
 
-        stage('Build Docker Image') {
+          stage('Build Docker Image') {
             steps {
-                dir('Jenkins/lab23') {
-                    sh """
-                        docker build -t docker.io/abdallah1312/ivolve:${BUILD_NUMBER} .
-                    """
-                }
+                sh """
+                    
+                    pwd
+                    cd Jenkins/lab23
+                    docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
+                """
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: DOCKER_CREDENTIALS, url: '']) {
+                withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
                     sh """
-                        docker push docker.io/abdallah1312/ivolve:${BUILD_NUMBER}
+                        docker push docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER}
+                        
+                       
                     """
                 }
             }
@@ -44,15 +49,23 @@ pipeline {
 
         stage('Update Deployment YAML') {
             steps {
-                dir('Jenkins/lab23') {
+               script {
                     sh """
-                        if [ -f ${KUBERNETES_DEPLOYMENT_FILE} ]; then
-                            sed -i 's|image: .*|image: abdallah1312/ivolve:${BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}
+                        pwd
+                        cd Jenkins/lab23
+                        echo "Current directory: $(pwd)"
+                        echo "Directory contents: $(ls -l)"
+                        
+                        if [ -f deployment.yaml ]; then
+                            echo "Found deployment.yaml, modifying it."
+                           
+                             sed -i 's|image: .*|image: abdallah1312/ivolve:54|' deployment.yaml
                         else
-                            echo "${KUBERNETES_DEPLOYMENT_FILE} not found!"
+                            echo "deployment.yaml not found!"
                         fi
                     """
                 }
+
             }
         }
 
@@ -76,9 +89,8 @@ pipeline {
             echo 'Pipeline failed! Check logs for details.'
         }
         always {
-            sh """
-                docker rmi docker.io/abdallah1312/ivolve:${BUILD_NUMBER} || true
-            """
+            echo "Cleaning up resources..."
+            sh "docker rmi ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER} || true"
         }
     }
 }
