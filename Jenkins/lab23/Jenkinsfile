@@ -48,27 +48,29 @@ pipeline {
             }
         }
 
-        stage('Update Deployment YAML') {
-            steps {
-               script {
-                    sh """
-                        pwd
-                        cd Jenkins/lab23
-                        echo "Current directory: $(pwd)"
-                        echo "Directory contents: $(ls -l)"
-                        
-                        if [ -f deployment.yaml ]; then
-                            echo "Found deployment.yaml, modifying it."
-                           
-                             sed -i 's|image: .*|image: abdallah1312/ivolve:54|' deployment.yaml
-                        else
-                            echo "deployment.yaml not found!"
-                        fi
-                    """
-                }
-
-            }
+       stage('Update Deployment YAML') {
+    steps {
+        script {
+            sh """
+                # Print current directory and its contents for debugging
+                pwd
+                cd Jenkins/lab23
+               
+                
+                # Check if the deployment.yaml file exists
+                if [ -f deployment.yaml ]; then
+                    echo "Found deployment.yaml, modifying it."
+                    
+                    # Dynamically update the image tag using the BUILD_NUMBER
+                    sed -i 's|image: .*|image: abdallah1312/ivolve:${BUILD_NUMBER}|' deployment.yaml
+                else
+                    echo "deployment.yaml not found!"
+                fi
+            """
         }
+    }
+}
+
 
     steps {
         script {
