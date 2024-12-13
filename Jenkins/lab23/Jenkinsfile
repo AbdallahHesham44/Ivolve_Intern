@@ -84,17 +84,18 @@ pipeline {
  stage('Deploy to Kubernetes') {
     steps {
         script {
-            withDockerRegistry([credentialsId: 'kubernetes-token', url: '']) {
+
+             withCredentials([string(credentialsId: 'kubernetes-token', variable: 'K8S_TOKEN')]) {
             sh """
-                # Ensure kubectl is configured to use Minikube
-                kubectl config use-context minikube
-                
-                # Navigate to the directory containing the deployment YAML
+                kubectl config set-credentials jenkins-user --token=${K8S_TOKEN}
+                kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
+                kubectl config use-context jenkins-context
+             # Navigate to the directory containing the deployment YAML
                 cd Jenkins/lab23
-                
-                # Apply the deployment file
-                kubectl apply -f \${KUBERNETES_DEPLOYMENT_FILE}
+            
+                kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
             """
+            
         }
     }
     }
