@@ -71,15 +71,6 @@ pipeline {
         }
     }
 }
-        stage('Setup Minikube Config') {
-    steps {
-        sh """
-            mkdir -p ${WORKSPACE}/.minikube
-            cp -R /home/abdallah/.minikube/* ${WORKSPACE}/.minikube
-        """
-    }
-}
-
 
  stage('Deploy to Kubernetes') {
     steps {
