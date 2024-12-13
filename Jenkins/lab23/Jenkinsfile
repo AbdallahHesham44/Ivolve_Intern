@@ -84,6 +84,7 @@ pipeline {
  stage('Deploy to Kubernetes') {
     steps {
         script {
+            withDockerRegistry([credentialsId: 'kubernetes-token', url: '']) {
             sh """
                 # Ensure kubectl is configured to use Minikube
                 kubectl config use-context minikube
@@ -95,6 +96,7 @@ pipeline {
                 kubectl apply -f \${KUBERNETES_DEPLOYMENT_FILE}
             """
         }
+    }
     }
 }
     }
