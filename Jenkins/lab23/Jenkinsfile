@@ -80,7 +80,7 @@ pipeline {
                 cd Jenkins/lab23
                 
                 # Apply the deployment file
-                kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
+                kubectl apply -f \${KUBERNETES_DEPLOYMENT_FILE}
             """
         }
     }
