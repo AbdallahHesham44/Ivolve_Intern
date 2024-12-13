@@ -3,7 +3,7 @@ pipeline {
 
 
     environment {
-        DOCKER_HUB_REPO = "abdallah1312/ivolve"
+        DOCKER_HUB_REPO = "docker.io/abdallah1312/ivolve"
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
@@ -40,7 +40,9 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
                     sh """
-                        docker push docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER}
+                        docker push ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
+                        docker rmi ${DOCKER_HUB_REPO}:${previousBuildNumber} || echo "Image not found or already removed"
+
                         
                        
                     """
