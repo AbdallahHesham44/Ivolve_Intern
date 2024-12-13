@@ -41,7 +41,7 @@ pipeline {
                 withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
                     sh """
                         docker push ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
-                        docker rmi ${DOCKER_HUB_REPO}:${previousBuildNumber} || echo "Image not found or already removed"
+                        #docker rmi ${DOCKER_HUB_REPO}:${previousBuildNumber} || echo "Image not found or already removed"
 
                         
                        
