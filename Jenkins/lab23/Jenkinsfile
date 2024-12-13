@@ -48,9 +48,9 @@ pipeline {
             }
         }
 
-       stage('Update Deployment YAML') {
-    steps {
-        script {
+    stage('Update Deployment YAML') {
+        steps {
+            script {
             sh """
                 # Print current directory and its contents for debugging
                 pwd
@@ -71,7 +71,7 @@ pipeline {
     }
 }
 
-
+ stage('Deploy to Kubernetes') {
     steps {
         script {
             sh """
