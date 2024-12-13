@@ -7,7 +7,7 @@ pipeline {
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
-        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+        KUBECONFIG = "${WORKSPACE}/.minikube/config"
     }
 
     stages {
@@ -71,6 +71,15 @@ pipeline {
         }
     }
 }
+        stage('Setup Minikube Config') {
+    steps {
+        sh """
+            mkdir -p ${WORKSPACE}/.minikube
+            cp -R /home/abdallah/.minikube/* ${WORKSPACE}/.minikube
+        """
+    }
+}
+
 
  stage('Deploy to Kubernetes') {
     steps {
