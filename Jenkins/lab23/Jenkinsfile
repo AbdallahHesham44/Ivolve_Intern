@@ -7,7 +7,7 @@ pipeline {
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
-        KUBECONFIG = "/home/abdallah/.kube/config"
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
