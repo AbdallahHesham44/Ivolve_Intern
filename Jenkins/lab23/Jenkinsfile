@@ -1,11 +1,12 @@
 pipeline {
     agent any
 
+
     environment {
         DOCKER_HUB_REPO = "abdallah1312/ivolve"
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
-        DOCKER_IMAGE_NAME ="ivolve"
+        DOCKER_IMAGE_NAME = "ivolve"
         KUBECONFIG = "/home/abdallah/.kube/config"
     }
 
@@ -69,18 +70,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+ stage('Deploy to Kubernetes') {
             steps {
-                sh """
-                    oc login https://api.ocp-training.ivolve-test.com:6443 --token=sha256~1yNoQKz-eTYiIC3Ag8MZvqVhr21jsEKSmjdBq7AWEl4 --insecure-skip-tls-verify
-                """
-            }
-                dir('Jenkins/lab23') {
-                    sh 'oc apply -f deployment.yaml'
+                withCredentials([string(credentialsId: 'OpenShift-Token', variable: 'OC_TOKEN')]) {
+                    sh """
+                        oc login https://api.ocp-training.ivolve-test.com:6443 --token=${OC_TOKEN} --insecure-skip-tls-verify
+                        cd Jenkins/lab23
+                        oc apply -f ${KUBERNETES_DEPLOYMENT_FILE}
+                    """
                 }
             }
         }
-    
+    }
 
     post {
         success {
