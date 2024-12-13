@@ -70,18 +70,22 @@ pipeline {
             }
         }
 
- stage('Deploy to Kubernetes') {
-            steps {
-                withCredentials([string(credentialsId: 'OpenShift-Token', variable: 'OC_TOKEN')]) {
-                    sh """
-                        oc login https://api.ocp-training.ivolve-test.com:6443 --token=${OC_TOKEN} --insecure-skip-tls-verify
-                        cd Jenkins/lab23
-                        oc apply -f ${KUBERNETES_DEPLOYMENT_FILE}
-                    """
-                }
-            }
+    steps {
+        script {
+            sh """
+                # Ensure kubectl is configured to use Minikube
+                kubectl config use-context minikube
+                
+                # Navigate to the directory containing the deployment YAML
+                cd Jenkins/lab23
+                
+                # Apply the deployment file
+                kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
+            """
         }
     }
+}
+
 
     post {
         success {
