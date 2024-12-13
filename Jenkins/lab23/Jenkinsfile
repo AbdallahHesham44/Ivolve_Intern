@@ -7,7 +7,7 @@ pipeline {
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
-        KUBECONFIG = "${WORKSPACE}/.minikube/config"
+        
     }
 
     stages {
@@ -77,6 +77,7 @@ pipeline {
         script {
 
              withCredentials([string(credentialsId: 'kubernetes-token', variable: 'K8S_TOKEN')]) {
+                   withEnv(["KUBECONFIG=$HOME/.kube/config"]) {
             sh """
                 kubectl config set-credentials jenkins-user --token=${K8S_TOKEN}
                 kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
@@ -88,6 +89,7 @@ pipeline {
             """
             
         }
+             }
     }
     }
 }
