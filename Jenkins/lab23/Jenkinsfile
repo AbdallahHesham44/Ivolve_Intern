@@ -1,101 +1,77 @@
 pipeline {
     agent any
 
-
     environment {
         DOCKER_HUB_REPO = "docker.io/abdallah1312/ivolve"
         KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
-        
     }
 
     stages {
         stage('Clean Workspace') {
             steps {
-                cleanWs()  // Cleans the workspace
+                cleanWs() // Cleans the workspace
             }
         }
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code...'
-                
                 git branch: 'main', url: 'https://github.com/AbdallahHesham44/Ivolve_Training.git'
-                
             }
         }
-
-          stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 sh """
-                    
                     pwd
                     cd Jenkins/lab23
-                    docker build -t docker.io/abdallah1312/ivolve:${env.BUILD_NUMBER} .
+                    docker build -t ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER} .
                 """
             }
         }
-
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: 'Docker-cred', url: '']) {
+                withDockerRegistry([credentialsId: DOCKER_CREDENTIALS, url: '']) {
                     sh """
                         docker push ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}
-
-                        
-                       
                     """
                 }
             }
         }
-
-    stage('Update Deployment YAML') {
-        steps {
-            script {
-            sh """
-                # Print current directory and its contents for debugging
-                pwd
-                cd Jenkins/lab23
-               
-                
-                # Check if the deployment.yaml file exists
-                if [ -f deployment.yaml ]; then
-                    echo "Found deployment.yaml, modifying it."
-                    
-                    # Dynamically update the image tag using the BUILD_NUMBER
-                    sed -i 's|image: .*|image: abdallah1312/ivolve:${BUILD_NUMBER}|' deployment.yaml
-                else
-                    echo "deployment.yaml not found!"
-                fi
-            """
+        stage('Update Deployment YAML') {
+            steps {
+                script {
+                    sh """
+                        pwd
+                        cd Jenkins/lab23
+                        if [ -f ${KUBERNETES_DEPLOYMENT_FILE} ]; then
+                            echo "Found ${KUBERNETES_DEPLOYMENT_FILE}, modifying it."
+                            sed -i 's|image: .*|image: ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}
+                        else
+                            echo "${KUBERNETES_DEPLOYMENT_FILE} not found!"
+                        fi
+                    """
+                }
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'kubernetes-token', variable: 'K8S_TOKEN')]) {
+                        withEnv(["KUBECONFIG=$HOME/.kube/config"]) {
+                            sh """
+                                kubectl config set-credentials jenkins-user --token=${K8S_TOKEN}
+                                kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
+                                kubectl config use-context jenkins-context
+                                cd Jenkins/lab23
+                                kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
+                            """
+                        }
+                    }
+                }
+            }
         }
     }
-}
-
- stage('Deploy to Kubernetes') {
-    steps {
-        script {
-
-             withCredentials([string(credentialsId: 'kubernetes-token', variable: 'K8S_TOKEN')]) {
-                   withEnv(["KUBECONFIG=$HOME/.kube/config"]) {
-            sh """
-                kubectl config set-credentials jenkins-user --token=${K8S_TOKEN}
-                kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
-                kubectl config use-context jenkins-context
-             # Navigate to the directory containing the deployment YAML
-                cd Jenkins/lab23
-            
-                kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
-            """
-            
-        }
-             }
-    }
-    }
-}
-    }
-    }
-
     post {
         success {
             echo 'Pipeline completed successfully!'
