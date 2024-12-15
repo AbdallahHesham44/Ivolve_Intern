@@ -63,11 +63,11 @@ pipeline {
                                  echo "KUBECONFIG is set to: $KUBECONFIG"
                                 ls -l /var/lib/jenkins/.minikube/
                                 kubectl config view
-                                kubectl get nodes
+                                
                                 
                                 kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
                                 kubectl config use-context jenkins-context
-                                
+                                kubectl get nodes
                                 kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
                             """
                         }
