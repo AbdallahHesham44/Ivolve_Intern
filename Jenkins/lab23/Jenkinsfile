@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = "docker.io/abdallah1312/ivolve"
-        KUBERNETES_DEPLOYMENT_FILE = "/Jenkins/lab23/deployment.yaml"
+        KUBERNETES_DEPLOYMENT_FILE = "deployment.yaml"
         DOCKER_CREDENTIALS = "Docker-cred"
         DOCKER_IMAGE_NAME = "ivolve"
     }
@@ -43,7 +43,7 @@ pipeline {
                 script {
                     sh """
                         pwd
-                        
+                        cd Jenkins/lab23/
                         if [ -f ${KUBERNETES_DEPLOYMENT_FILE} ]; then
                             echo "Found ${KUBERNETES_DEPLOYMENT_FILE}, modifying it."
                             sed -i 's|image: .*|image: ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}
@@ -64,7 +64,7 @@ pipeline {
                                 ls -l /var/lib/jenkins/.minikube/
                                 kubectl config view
                                 
-                                
+                                cd Jenkins/lab23/
                                 kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
                                 kubectl config use-context jenkins-context
 
