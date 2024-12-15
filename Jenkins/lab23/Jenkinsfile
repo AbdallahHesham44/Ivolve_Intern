@@ -67,7 +67,7 @@ pipeline {
                                 
                                 kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
                                 kubectl config use-context jenkins-context
-                                kubectl get nodes
+
                                 kubectl apply -f ${KUBERNETES_DEPLOYMENT_FILE}
                             """
                         }
