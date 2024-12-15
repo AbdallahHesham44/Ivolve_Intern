@@ -58,8 +58,12 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'kubernetes-token', variable: 'K8S_TOKEN')]) {
-                        withEnv(["KUBECONFIG = /var/lib/jenkins/.minikube/config"]) {
+                        withEnv(["KUBECONFIG=/var/lib/jenkins/.minikube/config"]) {
                             sh """
+                                 echo "KUBECONFIG is set to: $KUBECONFIG"
+                                ls -l /var/lib/jenkins/.minikube/
+                                kubectl config view
+                                kubectl get nodes
                                 kubectl config set-credentials jenkins-user --token=${K8S_TOKEN}
                                 kubectl config set-context jenkins-context --cluster=minikube --user=jenkins-user
                                 kubectl config use-context jenkins-context
