@@ -43,7 +43,9 @@ pipeline {
                 script {
                     sh """
                         pwd
-                        cd Jenkins/lab23/
+                        cd Jenkins/lab23
+                        
+                        
                         if [ -f ${KUBERNETES_DEPLOYMENT_FILE} ]; then
                             echo "Found ${KUBERNETES_DEPLOYMENT_FILE}, modifying it."
                             sed -i 's|image: .*|image: ${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}|' ${KUBERNETES_DEPLOYMENT_FILE}
