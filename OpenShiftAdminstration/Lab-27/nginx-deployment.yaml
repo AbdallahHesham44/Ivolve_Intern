@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  labels:
-    app: nginx
 spec:
   replicas: 3
   selector:
@@ -14,18 +12,8 @@ spec:
       labels:
         app: nginx
     spec:
-      initContainers:
-      - name: init-permissions
-        image: busybox
-        command:
-        - "sh"
-        - "-c"
-        - "chmod -R 777 /var/cache/nginx"
-        volumeMounts:
-        - name: nginx-cache
-          mountPath: /var/cache/nginx
       containers:
       - name: nginx
-        image: nginx:latest
+        image: nginx:1.25.3
         ports:
         - containerPort: 80
