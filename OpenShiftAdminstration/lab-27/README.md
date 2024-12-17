@@ -8,5 +8,17 @@
         kubectl rollout history deployment/nginx-deployment
 ```
 ![image](https://github.com/user-attachments/assets/f4acd6e9-22c2-4c86-8ab5-bb91d1abc2e3)
+```bash
+        kubectl rollout undo deployment/nginx-deployment
+```
+![image](https://github.com/user-attachments/assets/86561a9f-9612-4a22-ae6f-77aeba878c8d)
+```bash
+kubectl get pods -w
+```
+![image](https://github.com/user-attachments/assets/5472d34a-6bc4-4196-88e2-c5a0599af1b2)
+
+
+
+
 
 
