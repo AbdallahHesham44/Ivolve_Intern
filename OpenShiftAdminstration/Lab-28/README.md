@@ -57,7 +57,7 @@ spec:
       accessModes: ["ReadWriteOnce"]
       resources:
         requests:
-          storage: 5Gi
+          storage: 10Gi
 ```
 
 ## 3. Service YAML for MySQL StatefulSet
