@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: mysql
+spec:
+  ports:
+  - port: 3306              # The port that the service will expose
+    name: mysql
+    targetPort: 3306        # Target port on the container
+  clusterIP: None           # Makes this a headless service
+  selector:
+    app: mysql              # Matches the labels of the StatefulSet pods
+
