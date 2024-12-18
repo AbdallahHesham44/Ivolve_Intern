@@ -18,6 +18,8 @@ Run the following command to create a namespace called `ivolve`:
 kubectl create namespace ivolve
 ```
 
+![image](https://github.com/user-attachments/assets/a24aa73a-1908-4f61-b454-4a87556bfbf1)
+
 ---
 
 ### **2. Apply Resource Quota**
@@ -37,6 +39,8 @@ Apply the resource quota:
 kubectl apply -f resource-quota.yaml
 ```
 
+![image](https://github.com/user-attachments/assets/4c5d22b1-0038-438d-8e3c-01a4f463ea03)
+
 ---
 
 ### **3. Create a ConfigMap for MySQL**
@@ -55,6 +59,8 @@ Apply the ConfigMap:
 ```bash
 kubectl apply -f mysql-configmap.yaml
 ```
+
+![image](https://github.com/user-attachments/assets/e5e990f4-d30a-44b5-b96f-860431273cbf)
 
 ---
 
@@ -145,6 +151,7 @@ Verify pods:
 ```bash
 kubectl get pods -n ivolve
 ```
+![image](https://github.com/user-attachments/assets/6626a1ba-1f3f-464a-b129-4dbb8690d58a)
 
 ---
 
@@ -170,6 +177,7 @@ Verify the database and user configurations:
 SHOW DATABASES;
 SELECT User FROM mysql.user;
 ```
+![image](https://github.com/user-attachments/assets/81fc3992-b6bc-4289-b94e-14425b769845)
 
 ---
 
